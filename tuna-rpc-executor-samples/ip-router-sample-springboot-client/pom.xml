@@ -7,7 +7,7 @@
         <groupId>tuna.ttt</groupId>
         <artifactId>tuna-rpc-executor-samples</artifactId>
         <version>1.0-SNAPSHOT</version>
-        <relativePath>../../pom.xml</relativePath>
+<!--        <relativePath>../../pom.xml</relativePath>-->
     </parent>
 
     <artifactId>ip-router-sample-springboot-client</artifactId>
