@@ -23,6 +23,11 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>tuna.ttt</groupId>
+            <artifactId>tuna-rpc-core</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
 
     </dependencies>
 
