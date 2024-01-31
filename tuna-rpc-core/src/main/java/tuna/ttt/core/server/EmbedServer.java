@@ -1,6 +1,4 @@
 package tuna.ttt.core.server;
-
-
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -40,7 +38,6 @@ public class EmbedServer {
         thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                System.out.println("333333333333333");
                 EventLoopGroup bossGroup = new NioEventLoopGroup();
                 EventLoopGroup workerGroup = new NioEventLoopGroup();
                 ThreadPoolExecutor bizThreadPool = new ThreadPoolExecutor(
