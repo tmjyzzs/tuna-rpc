@@ -2,7 +2,9 @@ package tuna.ttt.core.server;
 
 
 import io.netty.bootstrap.ServerBootstrap;
+import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
@@ -26,7 +28,7 @@ import java.util.concurrent.*;
  * @Author ttt
  */
 public class EmbedServer {
-    private static final Logger logger = LoggerFactory.getLogger(EmbedServer.class);
+    private static final Logger log = LoggerFactory.getLogger(EmbedServer.class);
 
     private ExecutorBiz executorBiz;
 
@@ -34,9 +36,11 @@ public class EmbedServer {
 
     public void start(final String address, final int port) {
         executorBiz = new ExecutorBizImpl();
+        log.info("======netty 启动成功");
         thread = new Thread(new Runnable() {
             @Override
             public void run() {
+                System.out.println("333333333333333");
                 EventLoopGroup bossGroup = new NioEventLoopGroup();
                 EventLoopGroup workerGroup = new NioEventLoopGroup();
                 ThreadPoolExecutor bizThreadPool = new ThreadPoolExecutor(
@@ -69,8 +73,18 @@ public class EmbedServer {
                                         .addLast(new MessageCodecSharable())
                                         .addLast(new RpcResponseMessageHandler());
                             }
-                        });
+                        })
+                        .childOption(ChannelOption.SO_KEEPALIVE, true);
+                try {
+                    ChannelFuture future = bootstrap.bind(port).sync();
+                    future.channel().closeFuture().sync();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+
             }
         });
+        thread.setDaemon(true);    // daemon, service jvm, user thread leave >>> daemon leave >>> jvm leave
+        thread.start();
     }
 }
