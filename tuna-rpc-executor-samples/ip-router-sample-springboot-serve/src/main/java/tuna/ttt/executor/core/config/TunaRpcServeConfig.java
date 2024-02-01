@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import tuna.ttt.core.executor.TunaServeExecutor;
+import tuna.ttt.core.executor.impl.TunaServeSpringExecutor;
 
 /**
  * Description 服务端配置
@@ -29,8 +30,8 @@ public class TunaRpcServeConfig {
     @Bean
     public TunaServeExecutor tunaServeExecutor(){
 
-        TunaServeExecutor tunaServeExecutor = new TunaServeExecutor();
-        tunaServeExecutor.setPort(port);
-        return tunaServeExecutor;
+        TunaServeSpringExecutor tunaServeSpringExecutor = new TunaServeSpringExecutor();
+        tunaServeSpringExecutor.setPort(port);
+        return tunaServeSpringExecutor;
     }
 }

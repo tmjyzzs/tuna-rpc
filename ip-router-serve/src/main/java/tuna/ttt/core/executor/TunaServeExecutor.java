@@ -28,4 +28,8 @@ public class TunaServeExecutor {
         embedChannel = new EmbedChannel();
         embedChannel.start(port);
     }
+
+    public void start(){
+        initChannel(port);
+    }
 }
